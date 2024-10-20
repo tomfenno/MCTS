@@ -54,6 +54,8 @@ def expand(node):
         if action not in node.children:
             new_node = Node(node.state.take_action(action), node)
             node.children[action] = new_node
+            if len(actions) == len(node.children):
+                node.exhausted = True
             return new_node
         
 def simulate(node):
@@ -78,6 +80,8 @@ def select_child(node):
     best_nodes = []
 
     for child in node.children.values():
+        if child.visits == 0:
+            return child
         ucb1 = (child.utility / child.visits) + C * math.sqrt(math.log(node.visits) / child.visits)
         if ucb1 > highest_UCB1:
             highest_UCB1 = ucb1
@@ -96,7 +100,7 @@ def most_visited(node):
             most_visits = child.visits
             best_nodes = [child]
         elif child.visits == most_visits:
-            best_nodes.append(child)
+            best_nodes.append(child)      
         if len(best_nodes) == 1:
             return best_nodes[0]
         else:
