@@ -1,6 +1,7 @@
 import math
 import time
 import random
+from copy import deepcopy
 
 C = math.sqrt(2)
 
@@ -67,7 +68,7 @@ def simulate(node):
 def backpropogate(node, utility):
     while node is not None:
         node.visits += 1
-        node.utility += node.player * utility
+        node.utility += utility
         node = node.parent
 
 def playout(node):

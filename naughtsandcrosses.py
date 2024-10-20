@@ -12,7 +12,7 @@ import operator
 class NaughtsAndCrossesState():
     def __init__(self):
         self.board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-        self.currentPlayer = 1
+        self.currentPlayer = -1
 
     def get_player(self):
         return self.currentPlayer
