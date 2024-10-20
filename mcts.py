@@ -56,11 +56,11 @@ def expand(node):
             node.children[action] = new_node
             return new_node
         
-def simulate(state):
-    while not state.is_terminal():
-        action = random.choice(state.get_actions())
-        node_state = state.take_action(action)
-    return node_state.get_utility()
+def simulate(node):
+    while not node.state.is_terminal():
+        action = random.choice(node.state.get_actions())
+        node.state = node.state.take_action(action)
+    return node.state.get_utility()
     
 def backpropogate(node, utility):
     while node is not None:
@@ -91,7 +91,7 @@ def most_visited(node):
     most_visits = 0
     best_nodes = []
 
-    for child in node.children:
+    for child in node.children.values():
         if child.visits > most_visits:
             most_visits = child.visits
             best_nodes = [child]

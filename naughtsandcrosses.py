@@ -5,7 +5,6 @@
 from __future__ import division
 
 from copy import deepcopy
-from mcts import mcts
 from functools import reduce
 import operator
 
@@ -43,7 +42,13 @@ class NaughtsAndCrossesState():
                          [self.board[i][len(self.board) - i - 1] for i in range(len(self.board))]]:
             if abs(sum(diagonal)) == 3:
                 return True
-        return reduce(operator.mul, sum(self.board, []), 1)
+        
+        for row in self.board:
+            if 0 in row:
+                return False
+            
+        return True
+            
 
     def get_utility(self):
         for row in self.board:
@@ -56,7 +61,7 @@ class NaughtsAndCrossesState():
                          [self.board[i][len(self.board) - i - 1] for i in range(len(self.board))]]:
             if abs(sum(diagonal)) == 3:
                 return sum(diagonal) / 3
-        return False
+        return 0
 
 
 class Action():
