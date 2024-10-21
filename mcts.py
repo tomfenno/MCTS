@@ -19,7 +19,6 @@ class Node():
         self.exhausted = self.terminal
         self.visits = 0
         self.utility = 0
-        self.player = state.get_player()
         self.children = {}
 
 def mcts(initial_state, time_limit=None, iteration_limit=None):
