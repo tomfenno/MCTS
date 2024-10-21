@@ -47,6 +47,7 @@ def select(node):
             node = select_child(node)
         else:
             return expand(node)
+    return node
         
 def expand(node):
     actions = node.state.get_actions()
@@ -60,10 +61,11 @@ def expand(node):
             return new_node
         
 def simulate(node):
-    while not node.state.is_terminal():
-        action = random.choice(node.state.get_actions())
-        node.state = node.state.take_action(action)
-    return node.state.get_utility()
+    sim_node = deepcopy(node)
+    while not sim_node.state.is_terminal():
+        action = random.choice(sim_node.state.get_actions())
+        sim_node.state = sim_node.state.take_action(action)
+    return sim_node.state.get_utility()
     
 def backpropogate(node, utility):
     while node is not None:
