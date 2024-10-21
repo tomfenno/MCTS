@@ -103,18 +103,18 @@ def most_visited(node):
             most_visits = child.visits
             best_nodes = [child]
         elif child.visits == most_visits:
-            best_nodes.append(child)      
-        if len(best_nodes) == 1:
-            return best_nodes[0]
-        else:
-            best_nodes.clear()
-            best_ratio = float("-inf")
-            for node in best_nodes:
-                ratio = node.utility / node.visits
-                if ratio > best_ratio:
-                    best_ratio = ratio
-                    best_nodes = [node]
-                elif ratio == best_ratio:
-                    best_nodes.append(node)
+            best_nodes.append(child)    
+    if len(best_nodes) == 1:
+        return best_nodes[0]
+    else:
+        best_nodes.clear()
+        best_utility = float("-inf")
+        for node in best_nodes:
+            utility = node.utility
+            if utility > best_utility:
+                best_utility = utility
+                best_nodes = [node]
+            elif utility == best_utility:
+                best_nodes.append(node)
     
     return random.choice(best_nodes)

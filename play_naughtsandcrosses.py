@@ -28,8 +28,8 @@ def play_game():
             print_board(current_state) 
         else:
             print("Monty is thinking...")
-            action = mcts(current_state, iteration_limit=10)
-            print(f"Monty chose action: {action}")
+            action = mcts(current_state, iteration_limit=1000)
+            print(f"Monty chose action: ({action.y + 1}, {action.x + 1})")
             current_state = current_state.take_action(action)
             print_board(current_state)
             
